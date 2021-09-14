@@ -1,52 +1,67 @@
 package edu.sdccd.cisc191.template;
 
-import java.net.*;
-import java.io.*;
 
-/**
- * This program is a server that takes connection requests on
- * the port specified by the constant LISTENING_PORT.  When a
- * connection is opened, the program sends the current time to
- * the connected socket.  The program will continue to receive
- * and process connections until it is killed (by a CONTROL-C,
- * for example).  Note that this server processes each connection
- * as it is received, rather than creating a separate thread
- * to process the connection.
+/*
+ * This program is used to determine which used car inventory the user should be seriously considering.
+ * It does this by narrowing down the used car inventory. It will ask for the price, safety, mileage and fuel economy and based on that, determine whether that
+ * particular vehicle is suitable  or not. As of now it is in very early stage and am planning to make it more complex
+ * and elaborate as it progresses
  */
-public class Server {
-    private ServerSocket serverSocket;
-    private Socket clientSocket;
-    private PrintWriter out;
-    private BufferedReader in;
 
-    public void start(int port) throws Exception {
-        serverSocket = new ServerSocket(port);
-        clientSocket = serverSocket.accept();
-        out = new PrintWriter(clientSocket.getOutputStream(), true);
-        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+import java.util.Scanner; // Import the Scanner class
 
-        String inputLine;
-        while ((inputLine = in.readLine()) != null) {
-            CustomerRequest request = CustomerRequest.fromJSON(inputLine);
-            CustomerResponse response = new CustomerResponse(request.getId(), "Jane", "Doe");
-            out.println(CustomerResponse.toJSON(response));
+ class ChoosingUsedCar{ // start of the class
+
+    public static void main(String []args){ //main method
+        double price; // set and define the price
+        int safety; //set and define the safety rating
+        double mileage; //set and define the mileage
+        double mpg; // set and define the miles per gallon
+
+        Scanner keyboard = new Scanner (System.in); //Create a scanner object
+        System.out.println("Enter the price"); //asks user to enter the price
+        price=keyboard.nextDouble(); // store the price
+
+        System.out.println("Enter the safety rating"); //asks user to enter the safety rating
+        safety=keyboard.nextInt();//store the safety rating
+
+        System.out.println("Enter the mileage on the odometer"); //asks the used to enter the mileage of the vehicle
+        mileage=keyboard.nextDouble(); // store the mileage
+
+        System.out.println("Enter the fuel economy number"); // asks the user to enter the mpg
+        mpg=keyboard.nextDouble(); //stores the mpg
+
+        // below series of nested if else statements used to come up with the solution.
+
+        if (price <= 9000)
+        {
+            if (safety >= 4)
+            {
+                if (mileage <= 125000)
+                {
+                    if (mpg >= 25)
+                    {
+                        System.out.println("You found your car!");
+                    }
+                    else
+                    {
+                        System.out.println("Go check it out. But be sure to negotiate to get the price down");
+                    }
+                }
+                else
+                {
+                    System.out.println("Possible additional maintenance fee. Avoid");
+                }
+            }
+            else
+            {
+                System.out.println("Deathtrap! Don't Buy");
+            }
+
+        }
+        else
+        {
+            System.out.println("No suitable car. Come back after a while");
         }
     }
-
-    public void stop() throws IOException {
-        in.close();
-        out.close();
-        clientSocket.close();
-        serverSocket.close();
-    }
-
-    public static void main(String[] args) {
-        Server server = new Server();
-        try {
-            server.start(4444);
-            server.stop();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
-} //end class Server
+} //end class
