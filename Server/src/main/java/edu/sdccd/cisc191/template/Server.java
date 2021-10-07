@@ -13,8 +13,21 @@ import java.util.Scanner; // Import the Scanner class
  class ChoosingUsedCar{ // start of the class
 
     public static void main(String []args){ //main method
+        int length;
+        Scanner input=new Scanner(System.in);
+
+        System.out.println("How many vehicles are you looking at?");
+        length=input.nextInt();
+
+        String[] models  = new String[length];
+
+        for(int counter = 0; counter < length; counter++) {
+            System.out.println("Enter the make and model of the vehicle" + (counter + 1));
+            models[counter] = input.next();
+        }
+
         double price; // set and define the price
-        int safety; //set and define the safety rating
+        int safety;//set and define the safety rating
         double mileage; //set and define the mileage
         double mpg; // set and define the miles per gallon
 
