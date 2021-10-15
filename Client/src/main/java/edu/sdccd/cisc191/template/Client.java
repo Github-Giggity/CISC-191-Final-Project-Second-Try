@@ -1,51 +1,56 @@
 package edu.sdccd.cisc191.template;
 
-import java.net.*;
-import java.io.*;
 
-/**
- * This program opens a connection to a computer specified
- * as the first command-line argument.  If no command-line
- * argument is given, it prompts the user for a computer
- * to connect to.  The connection is made to
- * the port specified by LISTENING_PORT.  The program reads one
- * line of text from the connection and then closes the
- * connection.  It displays the text that it read on
- * standard output.  This program is meant to be used with
- * the server program, DateServer, which sends the current
- * date and time on the computer where the server is running.
+import javafx.application.Application;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+/* v.1.0.3 update: This JavaFX on Client allows user to interact in the way of inputting, pressing
+ * and the output. We are going to import a lot of javafx stuff
  */
 
-public class Client {
-    private Socket clientSocket;
-    private PrintWriter out;
-    private BufferedReader in;
+public class Client extends Application{ // extend application is how JavaFX starts always
 
-    public void startConnection(String ip, int port) throws IOException {
-        clientSocket = new Socket(ip, port);
-        out = new PrintWriter(clientSocket.getOutputStream(), true);
-        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+    private Parent createContent(){
+        VBox root = new VBox();
+        root.setPrefSize(500,500);
+
+        TextField input=new TextField();
+        input.setFont(Font.font(18));
+
+        Text output = new Text();
+        output.setFont(Font.font(18));
+
+        Button button= new Button ("Start here");
+
+        button.setOnAction(e-> { output.setText(input.getText());});
+        root.getChildren().addAll( input, button, output);
+
+        return root;
     }
 
-    public CustomerResponse sendRequest() throws Exception {
-        out.println(CustomerRequest.toJSON(new CustomerRequest(1)));
-        return CustomerResponse.fromJSON(in.readLine());
+    @Override
+
+    public void start(Stage stage) throws Exception{
+        stage.setScene(new Scene(createContent()));
+        stage.show();
     }
 
-    public void stopConnection() throws IOException {
-        in.close();
-        out.close();
-        clientSocket.close();
+    public static void main(String[] args){
+        launch (args);
     }
-    public static void main(String[] args) {
-        Client client = new Client();
-        try {
-            client.startConnection("127.0.0.1", 4444);
-            System.out.println(client.sendRequest().toString());
-            client.stopConnection();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 } //end class Client
 

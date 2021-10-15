@@ -3,7 +3,7 @@ Intermediate Java Programming Group A
 ## Prerequisites
 1. Maven
 2. Git
-3. JDK14
+3. JDK1.8
 ## Building
 mvn clean install
 ## Running

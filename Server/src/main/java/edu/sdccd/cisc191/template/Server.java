@@ -2,27 +2,31 @@ package edu.sdccd.cisc191.template;
 
 
 /*
- * This program is used to determine which used car inventory the user should be seriously considering.
+ * v1.0.0 This program is used to determine which used car inventory the user should be seriously considering.
  * It does this by narrowing down the used car inventory. It will ask for the price, safety, mileage and fuel economy and based on that, determine whether that
  * particular vehicle is suitable  or not. As of now it is in very early stage and am planning to make it more complex
  * and elaborate as it progresses
+ *
+ * v.1.0.2 updated: Made the array better so that it actually
+ * incorporates everything including the for loop to count the number of vehicles they are looking at
+ * and playing the resulting number of times the if else statement to make decision.
  */
-
 import java.util.Scanner; // Import the Scanner class
 
     class ChoosingUsedCar{ // start of the class
 
-    public static void main(String []args){ //main method
+    public static void main(String []args) {
+
         int length; //set up the length of the array for the number of vehicles they are looking for
-        Scanner input=new Scanner(System.in); //ask for user input
+        Scanner input = new Scanner(System.in); //ask for user input
 
         System.out.println("How many vehicles are you looking at?"); //actually display and ask
-        length=input.nextInt(); //keep that answer in the length variable
+        length = input.nextInt(); //keep that answer in the length variable
 
-        String[] models  = new String[length]; //now we are going to store the string of the car model
+        String[] models = new String[length]; //now we are going to store the string of the car model
         //name in array
 
-        for(int counter = 0; counter < length; counter++) { // for loop for counting the number of vehicle
+        for (int counter = 0; counter < length; counter++) { // for loop for counting the number of vehicle
             System.out.println("Enter the make and model of the vehicle" + (counter + 1));
             //actually displays ask the user for the make and model
             models[counter] = input.next();
