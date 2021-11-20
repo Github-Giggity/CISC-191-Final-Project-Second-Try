@@ -1,5 +1,12 @@
 package edu.sdccd.cisc191.template;
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.net.*;
 
+/* v.8.5.0 update: implemented networking to connect client with the server's choosingusedcar so they read each
+other and work
+ */
 
 /*
  * v1.0.0 This program is used to determine which used car inventory the user should be seriously considering.
@@ -14,6 +21,65 @@ package edu.sdccd.cisc191.template;
 import java.util.Scanner; // Import the Scanner class
 
     class ChoosingUsedCar{ // start of the class
+
+        private Socket socket=null;
+        private ServerSocket server=null;
+        private DataInputStream in=null;
+
+        //port constructor
+        public ChoosingUsedCar(int port)
+        {
+            //
+            try
+            {
+                server=new ServerSocket(port);
+                System.out.println("Start");
+                System.out.println("Wait..");
+
+                socket=server.accept();
+                System.out.println("accepted");
+
+                //input from the client socket
+                in=new DataInputStream(
+                        new BufferedInputStream(socket.getInputStream()));
+
+
+                String line="";
+                //reads client message until it is over
+                while(!line.equals("Over and out"))
+                {
+                    try
+                    {
+                        line=in.readUTF();
+                    }
+                    catch(IOException i)
+                    {
+                        System.out.println(i);
+                    }
+                }
+                //close
+                try
+                {
+                    in.close();
+                    server.close();
+                    socket.close();
+                }
+
+                catch(IOException i)
+                {
+                    System.out.println(i);
+                }
+            }
+            catch(UnknownHostException u)
+            {
+                System.out.println(u);
+            }
+            catch(IOException i)
+            {
+                System.out.println(i);
+            }
+        }
+
 
     public static void main(String []args) {
 

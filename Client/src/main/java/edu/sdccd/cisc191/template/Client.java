@@ -1,5 +1,6 @@
 package edu.sdccd.cisc191.template;
-
+import java.net.*;
+import java.io.*;
 
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -17,12 +18,72 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/* v.8.5.0 update: implemented networking to connect client with the server's choosingusedcar so they read each
+other and work
+ */
+
 /* v.1.0.3 update: This JavaFX on Client allows user to interact in the way of inputting, pressing
  * and the output. We are going to import a lot of javafx stuff.
  *  It is for the beginning of the project where the user first interacts with the app.
  */
 
 public class Client extends Application{ // extend application is how JavaFX starts always
+
+    //initializing sockets, input, output streams
+    private Socket socket=null;
+    private DataInputStream input=null;
+    private DataOutputStream out=null;
+    //constructor
+    public Client (String address, int port)
+    {
+        //connect
+        try
+        {
+            socket=new Socket(address, port);
+            System.out.println("Connection");
+            //takes input
+            input=new DataInputStream(System.in);
+            //sends output
+            out=new DataOutputStream(socket.getOutputStream());
+
+        }
+        catch(UnknownHostException u)
+        {
+            System.out.println(u);
+        }
+        catch(IOException i)
+        {
+            System.out.println(i);
+        }
+        // read message from input
+        String line= "";
+        //while loop to keep reading until it is over.
+        while(!line.equals("Over"))
+        {
+            try
+            {
+                line=input.readLine();
+                out.writeUTF(line);
+            }
+            catch(IOException i)
+            {
+                System.out.println(i);
+            }
+        }
+        //close
+        try{
+            input.close();
+            out.close();
+            socket.close();
+        }
+        catch(IOException i)
+        {
+            System.out.println(i);
+        }
+    }
+
+
+
 
     private Parent createContent(){ //how to create a "parent" to set the GUI
 
