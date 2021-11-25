@@ -3,7 +3,7 @@ package edu.sdccd.cisc191.template;
 import java.util.Scanner;
 
 //v.9.5.0 implements java generics to calculate the actual total price of the car with added miscellaneous cost
-//it makes sure that the number plugged in are extended from the number class so integer float or in this case double
+//it makes sure that the value of the variable plugged in are extended from the number class so integer float or in this case double
 
 public class TotalActualPrice<T extends Number //bounds the type> { //class that implements Java generics/collections
 
