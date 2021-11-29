@@ -5,9 +5,10 @@ import java.util.Scanner;
 //v.9.5.0 implements java generics to calculate the actual total price of the car with added miscellaneous cost
 //it makes sure that the value of the variable plugged in are extended from the number class so integer float or in this case double
 
-public class TotalActualPrice<T extends Number //bounds the type> { //class that implements Java generics/collections
+public class TotalActualPrice<T extends Number>  {
+    private T ob; //bounds type //class that implements Java generics/collections
 
-        public static void main(String []args) { //main method
+        public void main(String[] args) { //main method
             double carprice; //set and instantiate
             double DMVcost; //set and instantiate
             double insurance;  //set and instantiate
@@ -23,7 +24,7 @@ public class TotalActualPrice<T extends Number //bounds the type> { //class that
             insurance = keyboard.nextDouble();
 
             T ob; // T object
-            TotalActualPrice(T ob) { //constructor to initialize the t object
+            TotalActualPrice(T ob); { //constructor to initialize the t object
                 this.ob = ob;
             }
             void add () {

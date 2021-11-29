@@ -6,7 +6,7 @@ import java.io.*;
 
 //Days is the child or subclass of GeneralSpecification. In inherits everything in there as well as implementing
 //ChoosingUsedCar decision section
-public class Days extends GeneralSpecification implements ChoosingUsedCar{
+public abstract class Days extends GeneralSpecification implements ChoosingUsedCar{
 
     public Days(double userprice, int usersafety, double usermileage, double usermpg) {
         super(userprice, usersafety, usermileage, usermpg);

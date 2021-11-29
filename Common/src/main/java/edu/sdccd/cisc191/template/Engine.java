@@ -7,7 +7,7 @@ import java.io.*;
 //Engine is the child or subclass of GeneralSpecification. In inherits everything in there as well as implementing
 //ChoosingUsedCar decision section
 
-public class Engine extends GeneralSpecification implements ChoosingUsedCar{
+public abstract class Engine extends GeneralSpecification implements ChoosingUsedCar{
     public Engine(double userprice, int usersafety, double usermileage, double usermpg) {
         super(userprice, usersafety, usermileage, usermpg);
     }

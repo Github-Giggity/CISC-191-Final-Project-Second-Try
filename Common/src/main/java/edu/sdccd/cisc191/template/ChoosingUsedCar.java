@@ -1,5 +1,11 @@
 package edu.sdccd.cisc191.template;
 
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public interface ChoosingUsedCar {
@@ -15,6 +21,64 @@ public interface ChoosingUsedCar {
      * incorporates everything including the for loop to count the number of vehicles they are looking at
      * and playing the resulting number of times the if else statement to make decision.
      */
+
+   Socket socket=null;
+    ServerSocket server=null;
+    DataInputStream in=null;
+
+    //port constructor
+    public ChoosingUsedCar( int port)
+    {
+        //
+        try
+        {
+            server=new ServerSocket(port);
+            System.out.println("Start");
+            System.out.println("Wait..");
+
+            socket=server.accept();
+            System.out.println("accepted");
+
+            //input from the client socket
+            in=new DataInputStream(
+                    new BufferedInputStream(socket.getInputStream()));
+
+
+            String line="";
+            //reads client message until it is over
+            while(!line.equals("Over and out"))
+            {
+                try
+                {
+                    line=in.readUTF();
+                }
+                catch(IOException i)
+                {
+                    System.out.println(i);
+                }
+            }
+            //close
+            try
+            {
+                in.close();
+                server.close();
+                socket.close();
+            }
+
+            catch(IOException i)
+            {
+                System.out.println(i);
+            }
+        }
+        catch(UnknownHostException u)
+        {
+            System.out.println(u);
+        }
+        catch(IOException i)
+        {
+            System.out.println(i);
+        }
+    }
         public static void main(String []args) {
 
             int length; //set up the length of the array for the number of vehicles they are looking for

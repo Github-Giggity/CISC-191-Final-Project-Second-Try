@@ -7,7 +7,7 @@ import java.io.*;
 
 //Transmission is the child or subclass of GeneralSpecification. In inherits everything in there as well as implementing
 //ChoosingUsedCar decision section
-public class Transmission extends GeneralSpecification implements ChoosingUsedCar{
+public abstract class Transmission extends GeneralSpecification implements ChoosingUsedCar{
     public Transmission(double userprice, int usersafety, double usermileage, double usermpg) {
         super(userprice, usersafety, usermileage, usermpg);
     }

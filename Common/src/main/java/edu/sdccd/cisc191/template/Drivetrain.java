@@ -6,7 +6,7 @@ import java.io.*;
 
 //Drivetrain is the child or subclass of GeneralSpecification. In inherits everything in there as well as implementing
 //ChoosingUsedCar decision section
-public class Drivetrain extends GeneralSpecification implements ChoosingUsedCar{
+public abstract class Drivetrain extends GeneralSpecification implements ChoosingUsedCar{
 
 
     public Drivetrain(double userprice, int usersafety, double usermileage, double usermpg) {

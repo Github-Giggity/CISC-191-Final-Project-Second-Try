@@ -4,7 +4,7 @@ import java.io.*;
 
 //FuelType is the child or subclass of GeneralSpecification. In inherits everything in there as well as implementing
 //ChoosingUsedCar decision section
-public class FuelType extends GeneralSpecification implements ChoosingUsedCar{
+public abstract class FuelType extends GeneralSpecification implements ChoosingUsedCar{
     public FuelType(double userprice, int usersafety, double usermileage, double usermpg) {
         super(userprice, usersafety, usermileage, usermpg);
     }
