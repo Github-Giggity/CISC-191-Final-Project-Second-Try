@@ -30,7 +30,7 @@ public class TotalActualPrice<T extends Number>  {
         TotalActualPrice(T ob); { //constructor to initialize the t object
             this.ob = ob;
         }
-        void add ;() {
+        void add () {
             System.out.println(carprice+DMVcost+insurance);
         }
     }

@@ -22,63 +22,7 @@ import java.util.Scanner; // Import the Scanner class
 
     class ChoosingUsedCar{ // start of the class
 
-        private Socket socket=null;
-        private ServerSocket server=null;
-        private DataInputStream in=null;
 
-        //port constructor
-        public ChoosingUsedCar(int port)
-        {
-            //
-            try
-            {
-                server=new ServerSocket(port);
-                System.out.println("Start");
-                System.out.println("Wait..");
-
-                socket=server.accept();
-                System.out.println("accepted");
-
-                //input from the client socket
-                in=new DataInputStream(
-                        new BufferedInputStream(socket.getInputStream()));
-
-
-                String line="";
-                //reads client message until it is over
-                while(!line.equals("Over and out"))
-                {
-                    try
-                    {
-                        line=in.readUTF();
-                    }
-                    catch(IOException i)
-                    {
-                        System.out.println(i);
-                    }
-                }
-                //close
-                try
-                {
-                    in.close();
-                    server.close();
-                    socket.close();
-                }
-
-                catch(IOException i)
-                {
-                    System.out.println(i);
-                }
-            }
-            catch(UnknownHostException u)
-            {
-                System.out.println(u);
-            }
-            catch(IOException i)
-            {
-                System.out.println(i);
-            }
-        }
 
 
     public static void main(String []args) {

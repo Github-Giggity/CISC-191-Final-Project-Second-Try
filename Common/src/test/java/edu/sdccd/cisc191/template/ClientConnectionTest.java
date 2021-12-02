@@ -1,19 +1,15 @@
 package edu.sdccd.cisc191.template;
 
-//v. 10.5.1 added TotalSearchTest
-//v.10.5.2 added void TotalSearch for the TotalSearch unit test
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TotalSearchTest {
+//v.10.5.2 unit test for ClientConnection (client)
+
+class ClientConnectionTest {
 
     @Test
     void main() {
     }
-
-    void TotalSearch(){
-
-    }
 }
+//v.1.0.4 Added unit test for Client. ClientTest.Java

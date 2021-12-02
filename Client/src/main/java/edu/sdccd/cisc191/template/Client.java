@@ -29,58 +29,7 @@ other and work
 
 public class Client extends Application{ // extend application is how JavaFX starts always
 
-    //initializing sockets, input, output streams
-    private Socket socket=null;
-    private DataInputStream input=null;
-    private DataOutputStream out=null;
-    //constructor
-    public Client (String address, int port)
-    {
-        //connect
-        try
-        {
-            socket=new Socket(address, port);
-            System.out.println("Connection");
-            //takes input
-            input=new DataInputStream(System.in);
-            //sends output
-            out=new DataOutputStream(socket.getOutputStream());
 
-        }
-        catch(UnknownHostException u)
-        {
-            System.out.println(u);
-        }
-        catch(IOException i)
-        {
-            System.out.println(i);
-        }
-        // read message from input
-        String line= "";
-        //while loop to keep reading until it is over.
-        while(!line.equals("Over"))
-        {
-            try
-            {
-                line=input.readLine();
-                out.writeUTF(line);
-            }
-            catch(IOException i)
-            {
-                System.out.println(i);
-            }
-        }
-        //close
-        try{
-            input.close();
-            out.close();
-            socket.close();
-        }
-        catch(IOException i)
-        {
-            System.out.println(i);
-        }
-    }
 
 
 
